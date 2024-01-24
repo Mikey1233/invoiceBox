@@ -7,6 +7,7 @@
 :root{
 --font-poopins: 'Poppins', sans-serif;
 --bg-purple: blue;
+--btn-gradient:linear-gradient(to left,rgb(22, 76, 212), blue,rgb(58, 67, 247));
 }
 a{
   color: var(--bg-purple);

@@ -1,43 +1,42 @@
 import React from 'react';
-import logo from "../../assets/logo.png";
 import google from "../../assets/googleSvg.svg";
 import apple from "../../assets/apple-logo.svg";
 import { Link } from 'react-router-dom';
-import './signup.css'
+// import './signup.css'
+import '../cssForAuthPage.css'
 
 function Signup() {
   return (
-     <div className="authuser">
-      <span className="purple_bg"></span>
-      <div className="authuserLogo">
-        <img src={logo} alt="logo-img" />
-        <h3>Invoice-Box</h3>
-      </div>
+     <div>
+      
+
+
+
       <div className="authuser_auth">
         <form className="authuser_auth_box" method="post">
           <h3>Create account</h3>
 
           <div>
             <div>
-              <label for="username">Email address:</label>
+              <label htmlFor='email'>Email address:</label>
             </div>
-            <input type="email" id="email" name="email" required />
+            <input type="email" id='email' name="email" required autocomplete="email"/>
           </div>
 
           <div>
             <div>
-              <label for="username">Password:</label>
+              <label htmlFor='password'>Password:</label>
             </div>
 
-            <input type="password" id="password" name="password" required />
+            <input type="password" id='password' name="password" required />
           </div>
 
           <div>
             <div>
-              <label for="username"> re-enter Password:</label>
+              <label htmlFor="username"> re-enter Password:</label>
             </div>
 
-            <input type="password" id="password" name="password" required />
+            <input type="password" id='username' name="password" required />
           </div>
 
           <button type="submit">create account</button>

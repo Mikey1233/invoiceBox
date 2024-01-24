@@ -22,18 +22,7 @@ const router = createBrowserRouter(createRoutesFromElements(
   ))
 
 
-//   {
-//     path: "/",
-//     element: <Rootlayout />,
-  
-//     children: [
-//       {
-//         path: "authuser",
-//         element: <AuthUser />,
-//       },
-//     ],
-//   },
-// ]);
+
 function App() {
   return (
   <RouterProvider router={router}/>

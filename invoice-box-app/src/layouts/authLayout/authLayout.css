@@ -1,0 +1,18 @@
+.authuser{
+    display: grid;
+    background-color: rgb(247, 247, 247);
+    /* height: 100v; */
+    gap: 20px;
+    font-family: var(--font-poopins);
+    /* justify-content: center; */
+}
+.authuserLogo h3{
+    font-size: 24px;
+    letter-spacing: 0.04em;
+}
+
+.purple_bg{
+    height: 10px;
+    width: 100%;
+    background: var(--bg-purple);
+}

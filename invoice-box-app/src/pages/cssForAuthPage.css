@@ -1,21 +1,4 @@
-.authuser{
-    display: grid;
-    background-color: rgb(247, 247, 247);
-    /* height: 100v; */
-    gap: 20px;
-    font-family: var(--font-poopins);
-    /* justify-content: center; */
-}
-.authuserLogo h3{
-    font-size: 16px;
-    letter-spacing: 0.04em;
-}
 
-.purple_bg{
-    height: 10px;
-    width: 100%;
-    background: var(--bg-purple);
-}
 .authuser_auth{
     
     display: flex;
@@ -56,7 +39,7 @@
     
 }
 .authuser_auth form button{
-    background:linear-gradient(to left,rgb(22, 76, 212), blue,rgb(58, 67, 247)) ;
+    background:var(--bg-purple) ;
     font-size: 15px;
     color: #fff;
     border: 0;
