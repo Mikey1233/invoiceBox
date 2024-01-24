@@ -1,0 +1,13 @@
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root{
+--font-poopins: 'Poppins', sans-serif;
+--bg-purple: blue;
+}
+a{
+  color: var(--bg-purple);
+}
