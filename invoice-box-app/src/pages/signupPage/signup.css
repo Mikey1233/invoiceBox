@@ -1,0 +1,91 @@
+.authuser{
+    display: grid;
+    background-color: rgb(247, 247, 247);
+    /* height: 100v; */
+    gap: 20px;
+    font-family: var(--font-poopins);
+    /* justify-content: center; */
+}
+.authuserLogo h3{
+    font-size: 16px;
+    letter-spacing: 0.04em;
+}
+
+.purple_bg{
+    height: 10px;
+    width: 100%;
+    background: var(--bg-purple);
+}
+.authuser_auth{
+    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 2rem 1.5rem;
+}
+.authuser_auth form{
+    width: 100%;
+    box-shadow: 1px 1px 5px black;
+    max-width: 28rem;
+   box-shadow:  -5px 2px 20px gainsboro;
+    background-color: rgb(255, 255, 255);
+    border:1px solid rgb(178, 178, 178);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 5px;
+    padding: 3rem 1rem
+}
+.authuserLogo{
+
+    width: fit-content;
+    border-radius: 5px;
+    place-self: center;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    gap: 3px;
+}
+.authuserLogo img{
+    width: 2rem;
+}
+.authuser_auth form input{
+    width: 100%;
+    padding: 0.5rem;
+    margin: 10px 2px 10px 2px;
+    
+}
+.authuser_auth form button{
+    background:linear-gradient(to left,rgb(22, 76, 212), blue,rgb(58, 67, 247)) ;
+    font-size: 15px;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    outline: none;
+    padding: 0.5rem;
+    margin: 12px 10px;
+    cursor: pointer;
+}
+.auth_create-acct{
+    color: rgb(49, 49, 224);
+    text-align:  center;
+}
+.auth_apps{
+    margin: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.auth_apps_google ,.auth_apps_apple{
+    display: flex; 
+    gap: 7px;
+    background-color: #fff;
+    padding: 10px 12px;
+    font-size: 15px;
+    border: 1px solid rgb(178, 178, 178);
+   align-items: center;
+   cursor: pointer;
+}
+.auth_apps_google img,.auth_apps_apple img{
+ width: 1.5rem;
+}
