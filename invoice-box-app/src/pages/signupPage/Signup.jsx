@@ -3,6 +3,7 @@ import logo from "../../assets/logo.png";
 import google from "../../assets/googleSvg.svg";
 import apple from "../../assets/apple-logo.svg";
 import { Link } from 'react-router-dom';
+import './signup.css'
 
 function Signup() {
   return (
