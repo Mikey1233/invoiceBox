@@ -1,0 +1,18 @@
+.error_sign {
+   
+   font-size: 12px;
+   padding: 0.5rem 1rem ;
+   display: flex;
+   align-items: center;
+   margin: 5px;
+   gap: 1rem;
+    justify-content: space-between;
+    background-color: rgba(249, 222, 220);
+  }
+ 
+ .x {
+    display: grid;
+    justify-content: center;
+    cursor: pointer;
+ }
+  

@@ -6,6 +6,26 @@
     flex-direction: column;
     margin: 2rem 1.5rem;
 }
+.error{
+    font-size: 10px;
+    color: red;
+}
+.alert_modal{
+    font-size: 10px;
+    color: red;
+} 
+.input_box{
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    padding: 0 4px;
+    margin: 10px 2px 10px 2px;
+}
+.input_box img{
+    cursor: pointer;
+    width: 20px;
+}
+
 .authuser_auth form{
     width: 100%;
     box-shadow: 1px 1px 5px black;
@@ -34,20 +54,25 @@
 }
 .authuser_auth form input{
     width: 100%;
+    border: 0;
+    outline: none;
     padding: 0.5rem;
-    margin: 10px 2px 10px 2px;
     
 }
+.email_input{
+    border: 1px solid black;
+}
 .authuser_auth form button{
-    background:var(--bg-purple) ;
+    background:var(--btn-gradient) ;
     font-size: 15px;
     color: #fff;
     border: 0;
-    border-radius: 5px;
+    border-radius: 12px;
     outline: none;
-    padding: 0.5rem;
+    padding: 0.7rem;
     margin: 12px 10px;
     cursor: pointer;
+
 }
 .auth_create-acct{
     color: rgb(49, 49, 224);
@@ -71,4 +96,12 @@
 }
 .auth_apps_google img,.auth_apps_apple img{
  width: 1.5rem;
+}
+
+/* HTML: <div class="loader"></div> */
+.button-login{
+    text-align: -webkit-center;
+   display: flex;
+   justify-content: center;
+   align-items: flex-start;
 }

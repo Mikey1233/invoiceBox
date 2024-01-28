@@ -1,0 +1,29 @@
+.success{
+    color: green;
+}
+.bi-x-circle{
+ color: red;
+}
+.message{
+    font-size: 12px;
+    padding: 0.5rem 1rem ;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    gap: 1rem;
+    
+    position: fixed;
+    top: 10%; /* Position at the vertical center */
+    left: 50%;
+    transform: translate(-50%, -100%); 
+    /* opacity: 0; */
+    transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+}
+.message.show {
+    opacity: 1;
+  }
+.icon{
+    display: grid;
+    justify-content: center;
+}
