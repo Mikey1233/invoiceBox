@@ -1,0 +1,89 @@
+.sideBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color: #fffffd;
+  padding: 15px 25px;
+  border-radius: 10px;
+}
+.sideBar ul {
+  list-style-type: none;
+}
+.sideBar_Profile div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  border-bottom: 1px solid rgb(131, 129, 129);
+  padding: 2rem 2px;
+  margin-bottom: 2rem;
+}
+.sideBar_Profile div img {
+  border-radius: 50%;
+  width: 3rem;
+  margin-bottom: 10px;
+}
+.sideBar h4 {
+  font-family: var(--font-single);
+  font-weight: lighter;
+  font-size: 20px;
+  color: #000;
+}
+.sideBar p {
+  font-size: 12px;
+  font-family: var(--font-poopins);
+  color: #67696e;
+}
+.sideBar_list li {
+    color: #000;
+  font-family: var(--font-poopins);
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  color: #67696e;
+
+  margin-bottom: 12px;
+
+  letter-spacing: -0.04em;
+
+  cursor: pointer;
+}
+.sideBar_list li i {
+  margin-right: 10px;
+
+  color: #3b3b3b;
+}
+
+.sideBar_Aside ul li i {
+  margin-right: 10px;
+  color: #3b3b3b;
+}
+.sideBar a {
+  color: #000;
+  font-family: var(--font-poopins);
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  color: #67696e;
+
+  margin-bottom: 12px;
+
+  letter-spacing: -0.04em;
+
+  cursor: pointer;
+}
+.activeClass {
+  background-color: #18181b;
+  border-radius: 5px;
+  width: 100%;
+  display: block;
+  padding: 7px;
+  color: white;
+  text-decoration: none;
+}
+a.activeClass i {
+  color: white;
+}
