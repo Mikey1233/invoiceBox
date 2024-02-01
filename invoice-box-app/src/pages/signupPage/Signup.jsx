@@ -43,7 +43,7 @@ function Signup() {
     return passwordRegex.test(password);
   };
 
-  useAuthRedirect()
+  useAuthRedirect('userInfo')
   /////////////signin or signUp with google
 
   const Handle_EmailReg = async (e) => {

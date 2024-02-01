@@ -25,7 +25,10 @@ function SideBar() {
           auth?.currentUser?.displayName ||
             auth?.currentUser?.email.split("@")[0]
         );
+        
         setUserProfile(auth?.currentUser?.photoURL);
+      }else{
+        navigate('authuser')
       }
     });
 

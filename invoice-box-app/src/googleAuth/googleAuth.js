@@ -2,10 +2,9 @@
   import { auth,googleProvider } from '../config/firebaseConfig';
   
   const googleAuth = async () => {
-  
     try {
       await signInWithPopup(auth, googleProvider);
-    
+      
     } catch (err) {
       console.log(err);
     }
