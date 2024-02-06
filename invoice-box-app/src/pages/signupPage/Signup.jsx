@@ -1,6 +1,6 @@
 import google from "../../assets/googleSvg.svg";
 import apple from "../../assets/apple-logo.svg";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebaseConfig";
 import closedEye from "../../assets/closedEye.svg";
 import togglePasswordType from "../../togglePasswordType/toggle";
@@ -15,6 +15,7 @@ import googleAuth from "../../googleAuth/googleAuth";
 import SpinLoader from "../../components/spinLoader/SpinLoader";
 import useAuthRedirect from "../../checkActive/checkActive";
 function Signup() {
+  const navigate = useNavigate()
   //toggle states
   const [OpenPassword, setOpenPassword] = useState(false);
 
@@ -59,6 +60,7 @@ function Signup() {
         const user = userCredential.user;
         await sendEmailVerification(user);
         setPasswordMatch(false);
+        navigate('/userInfo')
         
       } catch (error) {
         

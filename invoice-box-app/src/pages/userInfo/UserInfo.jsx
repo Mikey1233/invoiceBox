@@ -4,8 +4,11 @@ import { auth } from "../../config/firebaseConfig";
 import { db } from "../../config/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
 import Modal from "../../components/modal/Modal";
+import { useNavigate } from "react-router-dom";
+import SpinLoader from "../../components/spinLoader/SpinLoader";
 
 function UserInfo() {
+  const navigate = useNavigate();
   const [businessName, setBusinessName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -14,22 +17,24 @@ function UserInfo() {
   const [add1, setAdd1] = useState("");
   const [add2, setAdd2] = useState("");
   /////////////
+  const [loader, setLoader] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [error, setError] = useState(false);
 
-  
   const user = auth?.currentUser?.uid;
   function hasEmptyInputs(values) {
     return Object.values(values).some((value) => value.trim() === "");
   }
 
   const sendDataToDB = async () => {
+    setLoader(true)
     if (
       hasEmptyInputs({ username, email, tel1, tel2, add1, add2, businessName })
     ) {
       setError(true);
       setToggle(true);
-    }else{
+      setLoader(false)
+    } else {
       try {
         await addDoc(collectionRef, {
           addressOne: add1,
@@ -41,14 +46,17 @@ function UserInfo() {
           Name: username,
           userId: user,
         });
+        navigate("/");
       } catch (err) {
         setError(true);
         setToggle(true);
-  
+        setLoader(false)
+
         console.log(err);
+      } finally{
+        setLoader(false)
       }
     }
-   
   };
 
   const addState = (e, setState) => {
@@ -70,124 +78,125 @@ function UserInfo() {
 
       <form method="post">
         <h3>User info</h3>
-
-        <div>
+        <div className="form-grid">
           <div>
-            <label htmlFor="username">
-              <i className="bi bi-envelope-check-fill"></i> email address
-            </label>
-          </div>
-          <input
-            type="email"
-            style={{ border: "1px solid black", margin: "10px 2px 10px 2px" }}
-            onChange={(e) => addState(e, setEmail)}
-            placeholder="enter email address"
-            name="email"
-            required
-          />
-        </div>
-
-        <div>
-          <div>
-            <label htmlFor="name">
-              <i className="bi bi-person-circle"></i> name
-            </label>
-          </div>
-
-          <div className="input_box">
+            <div>
+              <label htmlFor="username">
+                <i className="bi bi-envelope-check-fill"></i> email address
+              </label>
+            </div>
             <input
-              type="text"
-              placeholder="first name   last name"
-              name="name"
-              onChange={(e) => addState(e, setUsername)}
+              type="email"
+              style={{ border: "1px solid black", margin: "10px 2px 10px 2px" }}
+              onChange={(e) => addState(e, setEmail)}
+              placeholder="enter email address"
+              name="email"
               required
             />
           </div>
-        </div>
-        <div>
+
           <div>
-            <label htmlFor="business">
-              <i className="bi bi-briefcase-fill"></i> business name
-            </label>
-          </div>
+            <div>
+              <label htmlFor="name">
+                <i className="bi bi-person-circle"></i> name
+              </label>
+            </div>
 
-          <div className="input_box">
-            <input
-              type="text"
-              placeholder="business name"
-              name="business"
-              onChange={(e) => addState(e, setBusinessName)}
-              required
-            />
+            <div className="input_box">
+              <input
+                type="text"
+                placeholder="first name   last name"
+                name="name"
+                onChange={(e) => addState(e, setUsername)}
+                required
+              />
+            </div>
           </div>
-        </div>
-        <div>
           <div>
-            <label htmlFor="address">
-              <i className="bi bi-house-door-fill"></i> address
-            </label>
-          </div>
+            <div>
+              <label htmlFor="business">
+                <i className="bi bi-briefcase-fill"></i> business name
+              </label>
+            </div>
 
-          <div className="input_box">
-            <input
-              type="text"
-              placeholder="enter address"
-              name="address"
-              onChange={(e) => addState(e, setAdd1)}
-              required
-            />
+            <div className="input_box">
+              <input
+                type="text"
+                placeholder="business name"
+                name="business"
+                onChange={(e) => addState(e, setBusinessName)}
+                required
+              />
+            </div>
           </div>
-        </div>
-        <div>
           <div>
-            <label htmlFor="address">
-              <i className="bi bi-geo-alt-fill"></i> business address:
-            </label>
-          </div>
+            <div>
+              <label htmlFor="address">
+                <i className="bi bi-house-door-fill"></i> address
+              </label>
+            </div>
 
-          <div className="input_box">
-            <input
-              type="text"
-              placeholder="enter address 2"
-              name="address"
-              onChange={(e) => addState(e, setAdd2)}
-              required
-            />
+            <div className="input_box">
+              <input
+                type="text"
+                placeholder="enter address"
+                name="address"
+                onChange={(e) => addState(e, setAdd1)}
+                required
+              />
+            </div>
           </div>
-        </div>
-
-        <div>
           <div>
-            <label htmlFor="tel-1">
-              {" "}
-              <i className="bi bi-phone-fill"></i> mobile
-            </label>
+            <div>
+              <label htmlFor="address">
+                <i className="bi bi-geo-alt-fill"></i> business address:
+              </label>
+            </div>
+
+            <div className="input_box">
+              <input
+                type="text"
+                placeholder="enter address 2"
+                name="address"
+                onChange={(e) => addState(e, setAdd2)}
+                required
+              />
+            </div>
           </div>
 
-          <div className="input_box">
-            <input
-              type="number"
-              name="tel-1"
-              onChange={(e) => addState(e, setTel1)}
-              required
-            />
-          </div>
-        </div>
-
-        <div>
           <div>
-            <label htmlFor="tel-1">
-              <i className="bi bi-telephone-fill"></i> telephone
-            </label>
+            <div>
+              <label htmlFor="tel-1">
+                {" "}
+                <i className="bi bi-phone-fill"></i> mobile
+              </label>
+            </div>
+
+            <div className="input_box">
+              <input
+                type="number"
+                name="tel-1"
+                onChange={(e) => addState(e, setTel1)}
+                required
+              />
+            </div>
           </div>
 
-          <div className="input_box">
-            <input
-              type="number"
-              onChange={(e) => addState(e, setTel2)}
-              name="tel-2"
-              required
-            />
+          <div>
+            <div>
+              <label htmlFor="tel-1">
+                <i className="bi bi-telephone-fill"></i> telephone
+              </label>
+            </div>
+
+            <div className="input_box">
+              <input
+                type="number"
+                onChange={(e) => addState(e, setTel2)}
+                name="tel-2"
+                required
+              />
+            </div>
           </div>
         </div>
 
@@ -199,7 +208,7 @@ function UserInfo() {
           }}
           className="button-login"
         >
-          Submit
+          {loader ? <SpinLoader /> : "submit"}
         </button>
       </form>
     </div>

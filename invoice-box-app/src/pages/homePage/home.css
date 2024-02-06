@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: 30% 70%;
     height: 100%;
-    width: 100vw;
     gap: 5px;
     /* padding: 1rem; */
     background: linear-gradient(to bottom, #d1d4de,#bdc1ce);
