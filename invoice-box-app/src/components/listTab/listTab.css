@@ -1,0 +1,28 @@
+
+.client {
+  color: rgb(152, 142, 142);
+}
+.date {
+  font-size: 12px;
+  color: rgb(152, 142, 142);
+}
+.paid p {
+  background: #dcf6e6;
+  color: #23ac76;
+  width: fit-content;
+  padding: 4px 8px;
+
+  font-size: 12px;
+
+  border-radius: 5px;
+}
+.unPaid p {
+  background: #ffe8e0;
+  color: #de535e;
+  width: fit-content;
+  padding: 4px 8px;
+
+  font-size: 12px;
+
+  border-radius: 5px;
+}

@@ -1,0 +1,183 @@
+.create_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  /* height: fit-content; */
+}
+.file {
+    position: relative;
+    min-height: 100px;
+}
+.create_header .file .image-upload-box{
+  background-color: #f5f5f5;
+  color: #7d7d7d;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  padding: 1rem;
+  justify-content: center;
+  cursor: pointer;
+}
+.file input {
+  cursor: pointer;
+}
+.img {
+  width: 100%;
+
+  top: 0;
+  position: absolute;
+  left: 0;
+}
+.logo h2 {
+  font-size: 20px;
+  font-family: var(--font-poopins);
+   font-weight: lighter;
+}
+.create_body{
+margin-top: 1rem;
+}
+.create_body textarea{
+  margin: 5px;
+  padding: 4px;
+  outline: #565555;
+}
+.bill_form{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.bill{
+  display: flex;
+  padding: 10px;
+  margin-top: 1rem;
+  gap: 10px;
+}
+.bill_to label {
+  font-family: var(--font-poopins);
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  padding: 5px;
+  color: #565555;
+}
+.bill_to  div input{
+  padding: 0.2rem 1rem;
+  outline: #565555;
+  height: 50px;
+  border: 0;
+  /* box-shadow: 3px 3px 0px black; */
+}
+/* dates ,discount */
+.dates{
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 10px 10px 0 0;
+}
+.dates .title{
+  font-family: var(--font-poopins);
+  letter-spacing: -0.04em;
+  font-size: 15px;
+  padding: 0.5rem;
+  border-radius: 10px 10px 0 0;
+  color: #fff;
+  background-color: #232e38;
+}
+.dates div{
+  padding:0  0.5rem;
+
+}
+.dates div label{
+  color: #7d7d7d;
+  font-size: 14px;
+  margin-right: 4px;
+  letter-spacing: -0.04em;
+  font-family: var(--font-poopins);
+
+}
+.dates div input{
+  outline: none;
+  padding: 5px 7px;
+ 
+}
+/* description table ,styles */
+.des_table{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+.des_tr{
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-family: var(--font-poopins);
+  letter-spacing: -0.04em;
+  background-color: #232e38;
+  color: #fff;
+  align-items: flex-start;
+  padding: 10px 5px;
+  border-radius: 5px;
+  text-align: left;
+}
+.des_list{
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin: 5px 1px;
+}
+.des_list input {
+  padding: 10px 5px;
+  outline: none;
+  border-radius: 4px;
+  border: 0;
+}
+.des{
+  width: 250px;
+}
+.des input{
+  width: 100%;
+}
+.des_table button{
+  width: fit-content;
+  border: 0;
+  background-color: #009e74;
+  color: #f5f5f5;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 5px 6px;
+  margin: 10px 3px;
+}
+.des_bank{
+  width: fit-content;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 10px 10px 0 0;
+
+}
+.des_bank p{
+  background-color: #232e38;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px 10px 0 0;
+
+}
+.des_bank input{
+  padding: 0.5rem 1rem;
+  outline: none;
+  /* margin: 10px ; */
+  margin: 0 5px;
+}
+.submit{
+  padding: 10px 10px;
+  background-color: #009e74;
+  color: white;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  margin: 1rem 5px;
+}

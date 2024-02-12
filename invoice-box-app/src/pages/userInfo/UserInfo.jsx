@@ -6,6 +6,7 @@ import { addDoc, collection } from "firebase/firestore";
 import Modal from "../../components/modal/Modal";
 import { useNavigate } from "react-router-dom";
 import SpinLoader from "../../components/spinLoader/SpinLoader";
+import { hasEmptyInputs } from "../../components/submitData";
 
 function UserInfo() {
   const navigate = useNavigate();
@@ -22,10 +23,7 @@ function UserInfo() {
   const [error, setError] = useState(false);
 
   const user = auth?.currentUser?.uid;
-  function hasEmptyInputs(values) {
-    return Object.values(values).some((value) => value.trim() === "");
-  }
-
+  
   const sendDataToDB = async () => {
     setLoader(true)
     if (
@@ -33,7 +31,8 @@ function UserInfo() {
     ) {
       setError(true);
       setToggle(true);
-      setLoader(false)
+      setLoader(false
+        )
     } else {
       try {
         await addDoc(collectionRef, {

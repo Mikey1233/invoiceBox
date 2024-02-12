@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
-import { auth } from '../config/firebaseConfig'; // Adjust path to your Firebase configuration
-import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router
+import { auth } from '../config/firebaseConfig'; 
+import { useNavigate } from 'react-router-dom'; 
 
 function useAuthRedirect(path) {
     const navigate = useNavigate();
