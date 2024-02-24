@@ -4,7 +4,6 @@ import ListTab from "../listTab/ListTab";
 import { useState } from "react";
 import star from "../../assets/star2.svg";
 import { PieComp } from "../Piechart";
-
 import { getDocs,query,collection,where} from "firebase/firestore";
 import { auth ,db} from "../../config/firebaseConfig";
 function Starred() {

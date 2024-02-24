@@ -25,10 +25,10 @@ function SideBar() {
           auth?.currentUser?.displayName ||
             auth?.currentUser?.email.split("@")[0]
         );
-        
+
         setUserProfile(auth?.currentUser?.photoURL);
-      }else{
-        navigate('authuser')
+      } else {
+        navigate("authuser");
       }
     });
 
@@ -49,19 +49,37 @@ function SideBar() {
       <div className="sideBar_Profile">
         <div>
           <img src={userProfile || avatar} alt="user-pic" />
-          <h4>{userName || "no name"}</h4>
-          <p>frontend developer</p>
+          
+            <h4 className="name-tag">{userName || "no name"}</h4>
+            <p className="name-tag">frontend developer</p>
+          
         </div>
 
         <ul className="sideBar_list">
-         <List routeProp={'/'} iconClass={'bi bi-receipt'} currentPathname={currentPathname}/>
-          <List routeProp={'create'} iconClass={'bi bi-tools'} currentPathname={currentPathname}/>
-          <List  routeProp={'starred'} iconClass={'bi bi-star-fill'} currentPathname={currentPathname}/>
-          <List routeProp={'settings'} iconClass={'bi bi-gear'} currentPathname={currentPathname}/>
-       
+          <List
+            routeProp={"/"}
+            iconClass={"bi bi-receipt"}
+            currentPathname={currentPathname}
+          />
+          <List
+            routeProp={"create"}
+            iconClass={"bi bi-tools"}
+            currentPathname={currentPathname}
+          />
+          <List
+            routeProp={"starred"}
+            iconClass={"bi bi-star-fill"}
+            currentPathname={currentPathname}
+          />
+          <List
+            routeProp={"settings"}
+            iconClass={"bi bi-gear"}
+            currentPathname={currentPathname}
+          />
+
           <li>
             <a>
-              <i className="bi bi-brightness-high-fill"></i>Theme
+              <i className="bi bi-brightness-high-fill"></i> <span className="log-text">Theme</span>
             </a>
           </li>
         </ul>
@@ -70,7 +88,7 @@ function SideBar() {
       <div className="sideBar_Aside">
         <ul>
           <li onClick={signUserOut}>
-            <i className="bi bi-box-arrow-right"></i>logout
+            <i className="bi bi-box-arrow-right"></i> <span className="log-text">logout</span>
           </li>
         </ul>
       </div>

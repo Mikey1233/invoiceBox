@@ -1,7 +1,5 @@
 import "./home.css";
-// import { auth } from "../../config/firebaseConfig";
 
-// import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 ////sideBar component
 import SideBar from "../../components/sideNavBar/SideBar";

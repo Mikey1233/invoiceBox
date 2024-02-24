@@ -23,3 +23,25 @@
   margin: 10px 20px 50px 0;
   grid-column: 2/3;
 }
+@media screen and (max-width:700px){
+  .Home{
+    grid-template-columns: 1fr;
+    grid-template-rows:  1fr 100px;
+    position: relative;
+  }
+  .Home_nav{
+    grid-column: unset;
+    height: 100px;
+    grid-row: 2/3;
+    position: fixed;
+    bottom: 0;
+    z-index: 10000;
+    width: 100%;
+    padding: 0;
+  }
+  .Home_body{
+    grid-column: unset;
+    grid-row: 1/2;
+    margin: 10px;
+  }
+}

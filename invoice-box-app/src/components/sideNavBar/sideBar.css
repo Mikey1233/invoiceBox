@@ -87,3 +87,40 @@
 a.activeClass i {
   color: white;
 }
+@media screen and (max-width:700px){
+  .sideBar {
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    background-color: #fffffd;
+    padding: 10px;
+    padding-top: 2.5rem ;
+    border-radius: 0;
+    align-items: center;
+    /* width: 100%; */
+    /* width: 100vw; */
+  }
+  .sideBar_Profile div{
+    border-bottom: unset;
+  }
+ .name-tag,.log-text{
+  display: none;
+ }
+ .sideBar_list{
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+ }
+ .sideBar_Profile{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+ }
+ .sideBar i {
+  font-size: 17px;
+ }
+ .sideBar div img {
+  width: 2rem;
+ }
+}

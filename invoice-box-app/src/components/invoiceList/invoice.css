@@ -33,49 +33,46 @@
 }
 /* customisation for scroll bar */
 
-.invoice_list-dashboard{ 
+.invoice_list-dashboard {
   scroll-padding-top: 9rem;
   scroll-behavior: smooth;
 }
-.invoice_list-dashboard::-webkit-scrollbar{
-  width: .2rem;
+.invoice_list-dashboard::-webkit-scrollbar {
+  width: 0.2rem;
 }
-.invoice_list-dashboard::-webkit-scrollbar-track{
+.invoice_list-dashboard::-webkit-scrollbar-track {
   background: transparent;
-  
 }
-.invoice_list-dashboard::-webkit-scrollbar-thumb{
-  background:#757575;
+.invoice_list-dashboard::-webkit-scrollbar-thumb {
+  background: #757575;
   border-radius: 5rem;
-} 
-.payTag{
+}
+.payTag {
   display: flex;
   gap: 20px;
   /* padding: 2px 0 0 10px; */
   position: absolute;
- top: 5px;
- left: 5px;
+  top: 5px;
+  left: 5px;
   font-size: 13.5px;
   z-index: 100;
 }
-.green,.red{
+.green,
+.red {
   width: 20px;
   height: 10px;
   background-color: #23ac76;
-    display: inline-block;
-    margin-left: 10px;
+  display: inline-block;
+  margin-left: 10px;
 }
-.red{
+.red {
   background-color: #de535e;
-
 }
-
 
 .invoice_list-dashboard table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow-x: scroll;
-
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: scroll;
 }
 
 .left-aligned-table th,
@@ -87,5 +84,23 @@
   text-align: left;
   border-bottom: 1px solid #dddddd;
 }
+@media screen and (max-width: 700px) {
+  .invoice_list {
+    height: fit-content;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  .invoice_list-amount-1 {
+    grid-column: unset;
+    grid-row: 1/2;
+  }
+  .invoice_list-amount-2 {
+    grid-row: 2/3;
+    grid-column: unset;
+  }
 
-
+  .invoice_list-dashboard {
+    grid-column: unset;
+    grid-row: 3/4;
+  }
+}
