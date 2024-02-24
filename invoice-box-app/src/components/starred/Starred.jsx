@@ -34,7 +34,7 @@ function Starred() {
       <div className="img2">
         <img src={star} alt="star_pic" />
       </div>
-      <div className="invoice_list-amount-2">
+      <div className="invoice_list-amount-2" style={{height:'50vh'}}>
         <div className="payTag">
           <div>
             paid<span className="green"></span>

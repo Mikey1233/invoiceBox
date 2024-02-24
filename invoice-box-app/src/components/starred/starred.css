@@ -30,6 +30,7 @@
  .img2{
   grid-column: unset;
 grid-row: unset;
+padding-top: 20px;
 
 }
 .img2 img{
