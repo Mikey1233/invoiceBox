@@ -71,7 +71,7 @@ function InvoiceList() {
         <LineChartComp newData={data3} />
       </div>
       <div className="invoice_list-amount-2">
-        <div className="payTag" style={{}}>
+        <div className="payTag">
           <div>
             paid<span className="green"></span>
           </div>
