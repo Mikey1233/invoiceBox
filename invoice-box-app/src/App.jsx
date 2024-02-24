@@ -19,23 +19,22 @@ import Setting from "./components/settings/Setting";
 import Create from "./components/createInvoice/Create";
 import Starred from "./components/starred/Starred";
 import InvoiceList from "./components/invoiceList/InvoiceList";
+import DynPdf from "./components/dynamicPdfPage/DynPdf";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Rootlayout />}>
-
       <Route path="authUser" element={<AuthLayout />}>
         <Route index element={<LoginUser />} />
         <Route path="signup" element={<Signup />} />
       </Route>
-      <Route path="userInfo" element={<UserInfo/>}/>
-
+      <Route path="userInfo" element={<UserInfo />} />
       <Route path="/" element={<Home />}>
-        <Route index element={<InvoiceList/>}/>
+        <Route index element={<InvoiceList />} />
         <Route path="settings" element={<Setting />} />
         <Route path="create" element={<Create />} />
         <Route path="starred" element={<Starred />} />
+        <Route path="pdf" element={<DynPdf />} />
       </Route>
-
     </Route>
   )
 );

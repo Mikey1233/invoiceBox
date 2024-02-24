@@ -1,88 +1,104 @@
-import React from "react";
-import { Pie } from "react-chartjs-2";
-// import { Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
-import { Doughnut, Line } from "react-chartjs-2";
-// import { Line } from 'react-chartjs-2';
-import { useEffect } from "react";
-import { Chart as ChartJS, registerables } from "chart.js";
+import React, { PureComponent } from "react";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+} from "recharts";
+import {  Sector, Cell} from 'recharts';
 
-ChartJS.register(...registerables);
-// ChartJS.register(ArcElement, Tooltip, Legend);
+import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 
-const PieChart = ({ paid, unpaid }) => {
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Payment chart",
-      },
-    },
-  };
 
-  const data = {
-    labels: ["paid", "unpaid"],
-    datasets: [
-      {
-        label: "payments data",
-        data: [paid, unpaid],
-        backgroundColor: ["#23ac76", "#de535e"],
-        borderColor: ["#23ac76", "#de535e"],
-        borderWidth: 1,
-      },
-    ],
-  };
+export default class LineChartComp extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div
+        style={{
+          width: "100%",
+          fontSize: "12px",
+          textAlign: "center",
+          paddingTop: "4px",
+        }}
+      >
+        <p>invoice per months</p>
 
-  return <Doughnut data={data} options={options} />;
+        <ResponsiveContainer width="100%" height={210}>
+          <AreaChart
+            width={500}
+            height={200}
+            data={this.props.newData}
+            syncId="anyId"
+            margin={{
+              top: 35,
+              right: 17,
+              left: -25,
+              bottom: -10,
+            }}
+          >
+            {/* <CartesianGrid strokeDasharray="3 3" /> */}
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Area
+              type="monotone"
+              dataKey="value"
+              stroke="#8884d8"
+              fill="#8884d8"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    );
+  }
+}
+
+
+
+
+const COLORS = ['#23ac76', '#de535e'];
+
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
 };
 
-export function LineChart({amounts}) {
-   
-  
-    
-    //////////////////////////////////////
-  const canvasRef = React.useRef(null);
-  const month = new Date().getMonth();
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const chartData = {
-    labels: months,
-    datasets: [
-      {
-        label: `no of invoices per month`,
-        data: amounts,
-        borderColor: "#23ac76",
-        backgroundColor: "#23ac76",
-        borderWidth: 1,
-      },
-    ],
-  };
-  useEffect(() => {
-    // Destroy any existing chart on update to avoid canvas conflicts
-    if (canvasRef.current) {
-      const chartInstance = ChartJS.getChart(canvasRef.current);
-      if (chartInstance) {
-        chartInstance.destroy();
-      }
-    }
-  }, [chartData]);
-
-  return <Line data={chartData} />;
+export class PieComp extends PureComponent {
+  // static demoUrl = 'https://codesandbox.io/s/pie-chart-with-customized-label-dlhhj';
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart width={400} height={400}>
+          <Pie
+            data={this.props.newData}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={renderCustomizedLabel}
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {this.props.newData?.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+    );
+  }
 }
-export default PieChart;

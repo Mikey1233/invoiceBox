@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import "./invoice.css";
 import ListTab from "../listTab/ListTab";
-///////////fetch data form firestore
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { auth, db, googleProvider } from "../../config/firebaseConfig";
+import { auth } from "../../config/firebaseConfig";
 import { useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import PieChart, { LineChart } from "../Piechart";
+import LineChartComp from "../Piechart";
+import { PieComp } from "../Piechart";
+import { fetchdata } from "../submitData";
 
 function InvoiceList() {
   let num = 0;
@@ -14,64 +14,35 @@ function InvoiceList() {
   const userIdToFetch = auth?.currentUser?.uid;
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
- 
+  const invoice = data.map((arr) => arr.date[1]);
+
   ////////////////////
-  const invoiceMonths = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec",
+  let data3 = [
+    { name: "Jan", value: 0 },
+    { name: "Feb", value: 0 },
+    { name: "Mar", value: 0 },
+    { name: "Apr", value: 0 },
+    { name: "May", value: 0 },
+    { name: "Jun", value: 0 },
+    { name: "Jul", value: 0 },
+    { name: "Aug", value: 0 },
+    { name: "Sept", value: 0 },
+    { name: "Oct", value: 0 },
+    { name: "Nov", value: 0 },
+    { name: "Dec", value: 0 },
   ];
-
-  const invoicesPerMonth = {};
-
-  // Initialize the snacksPerMonth object with 0 frequency for each month
-  invoiceMonths.forEach((a) => {
-    invoicesPerMonth[a] = 0;
-  });
-
-  // Assuming you have an array containing the months you had snacks
- const invoice = data.map((arr)=>arr.date[1])
-
-  // Count the frequency of snacks for each month
-  invoice.forEach((month) => {
-    if (invoicesPerMonth.hasOwnProperty(month)) {
-      invoicesPerMonth[month]++;
+  data3.forEach((arr) => {
+    for (let i = 0; i < invoice.length; i++) {
+      if (arr.name === invoice[i]) {
+        arr.value++;
+      }
     }
   });
 
-  // console.log(snacksPerMonth);
-
-  ///////////////////
-  const fetchdata = async () => {
-    try {
-      const q = await query(
-        collection(db, "invoice"),
-        where("userId", "==", auth?.currentUser?.uid)
-      );
-
-      const querySnapshot = await getDocs(q);
-
-      const fetchedData = await querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setData(fetchedData);
-      
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  ////////////////////////////////////////////////////
+  const paymentData = [
+    { name: "paid", value: data.filter((a) => a.status === "paid").length },
+    { name: "unpaid", value: data.filter((a) => a.status === "unpaid").length },
+  ];
 
   useEffect(() => {
     const auth = getAuth();
@@ -79,7 +50,8 @@ function InvoiceList() {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
-          fetchdata(); // Call your fetchdata function
+          //fetching list of invoice from db
+          fetchdata("invoice", "userId", setData);
         } catch (err) {
           setError(err);
         } finally {
@@ -92,23 +64,23 @@ function InvoiceList() {
 
     return unsubscribe; // Unsubscribe from the listener when the component unmounts
   }, []);
-  //////pie data
 
   return (
     <div className="invoice_list">
-      {/* <div className="invoice_list-amount"> */}
       <div className="invoice_list-amount-1">
-        
-        <LineChart amounts={Object.values(invoicesPerMonth)} />
+        <LineChartComp newData={data3} />
       </div>
       <div className="invoice_list-amount-2">
-       
-        <PieChart
-          paid={data.filter((a) => a.status === "paid").length}
-          unpaid={data.filter((a) => a.status === "unpaid").length}
-        />
+        <div className="payTag" style={{}}>
+          <div>
+            paid<span className="green"></span>
+          </div>
+          <div>
+            unPaid<span className="red"></span>
+          </div>
+        </div>
 
-       
+        <PieComp newData={paymentData} />
       </div>
       <div className="invoice_list-dashboard">
         <table className="left-aligned-table">
@@ -135,7 +107,8 @@ function InvoiceList() {
                 amount={arr.items
                   .map((arr) => +arr.quantity * +arr.amount)
                   .reduce((a, b) => a + b)}
-                key={arr.id}
+                key={arr?.DocId}
+                formArr={arr}
               />
             ))}
           </tbody>

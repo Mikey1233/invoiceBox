@@ -14,11 +14,13 @@
   border-radius: 10px;
 }
 .invoice_list-amount-2 {
+  position: relative;
   grid-row: 1/2;
   grid-column: 2/3;
   border-radius: 10px;
-  display: grid;
-  justify-content: center
+  background-color: #fff;
+  /* display: grid; */
+  /* justify-content: center */
 }
 
 .invoice_list-dashboard {
@@ -46,8 +48,27 @@
   background:#757575;
   border-radius: 5rem;
 } 
+.payTag{
+  display: flex;
+  gap: 20px;
+  /* padding: 2px 0 0 10px; */
+  position: absolute;
+ top: 5px;
+ left: 5px;
+  font-size: 13.5px;
+  z-index: 100;
+}
+.green,.red{
+  width: 20px;
+  height: 10px;
+  background-color: #23ac76;
+    display: inline-block;
+    margin-left: 10px;
+}
+.red{
+  background-color: #de535e;
 
-
+}
 
 
 .invoice_list-dashboard table {

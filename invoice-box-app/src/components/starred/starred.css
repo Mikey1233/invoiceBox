@@ -1,0 +1,23 @@
+.starred{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    height: 110vh;
+}
+.img2{
+    /* background-color: transparent; */
+    grid-column: 1/2;
+    display: grid;
+    justify-content: center;
+    place-items: center;
+    align-content: center;
+  grid-row: 1/2;
+  /* background-color: #fff; */
+  border-radius: 10px;
+}
+.img2 img{
+  /* width: fit-content; */
+  object-fit: contain;
+  width: 50%;
+}

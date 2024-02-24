@@ -5,8 +5,12 @@ import InvoiceItem from "./InvoiceItem";
 import { add, hasEmptyInputs } from "../submitData";
 import Modal from "../modal/Modal";
 import { auth } from "../../config/firebaseConfig";
+import {useNavigate} from 'react-router-dom'
 
 function Create() {
+  const navigate = useNavigate()
+
+  
   const months = [
     "Jan",
     "Feb",
@@ -21,9 +25,10 @@ function Create() {
     "Nov",
     "Dec",
   ];
-  console.log()
+  
   // const fullDate = 'hey'
   const fullDate = [new Date().getDate(),months[new Date().getMonth()],new Date().getFullYear()]
+  const [id,setId] = useState('')
   const [formData, setFormData] = useState({
     // Initial values for each field
     user: "",
@@ -57,10 +62,7 @@ function Create() {
   const [items, setItems] = useState([
     { description: "", amount: '', quantity: '', productName: "" },
   ]);
-  //////form data states
-  const [user, setUser] = useState("");
-  const [billTo, setBillto] = useState("");
-  const [address, setAddress] = useState("");
+ 
   const [selectedImage, setSelectedImage] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -83,14 +85,13 @@ function Create() {
       );
       return;
     }
-    // Display the image
-    // const reader = ;
+   
     const reader = new FileReader();
     reader.onload = (e) => {
       setSelectedImage(e.target.result);
     };
     reader.readAsDataURL(file);
-    // console.log(selectedImage,file)
+  
   };
   const handleCancel = () => {
     setSelectedImage(null);
@@ -120,7 +121,7 @@ function Create() {
         bankName: "",
       });
       
-      add({ ...formData, items: items,date:fullDate, userId: auth?.currentUser?.uid});
+   add({ ...formData, items: items,date:fullDate, userId: auth?.currentUser?.uid},'invoice',setId,navigate);
     }
   };
   return (

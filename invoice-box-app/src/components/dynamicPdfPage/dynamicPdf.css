@@ -1,0 +1,117 @@
+.pdf-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: "PT Sans", sans-serif;
+  background-color: white;
+}
+.pdf-table th {
+  background-color: #0277bd;
+  color: white;
+  font-family: var(--font-poopins);
+}
+
+.pdf-table th,
+.pdf-table td {
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+  text-align: left;
+}
+.billTo {
+ border-top: var(--fade);  
+ padding: 2rem 4px 2rem 4px; 
+  display: flex;
+  font-family: "PT Sans", sans-serif;
+  justify-content: space-between;
+  margin: 1rem 0 1rem 0;
+  /* border-top: 2px solid #0277bd; */
+  font-weight: 400;
+  font-style: normal;
+}
+.billTo div{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.name {
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: -0.04em;
+  font-family: var(--font-poopins);
+}
+.text {
+  font-size: 13px;
+}
+
+.pdf-table th {
+  font-weight: bold;
+  font-size: 13px;
+  font-family: var(--font-poopins);
+  letter-spacing: -0.04em;
+}
+.pdf-table tr:nth-of-type(even) {
+  background-color: #f1f1f1db;
+}
+.issuer {
+  padding: 2rem 5px 2rem 5px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "PT Sans", sans-serif;
+}
+.bankDet {
+  display: flex;
+  padding: 2rem 4px 1rem 4px;
+  margin-top: 4rem;
+  justify-content: space-between;
+  border-top:var(--fade);
+}
+.paymentInfo,
+.paymentBal {
+  display: flex;
+  flex-direction: column;
+  font-family: "PT Sans", sans-serif;
+
+  gap: 2px;
+  /* font-family: var(--font-poopins); */
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  font-style: normal;
+}
+.paymentBal .pay {
+  flex-direction: row;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 5rem;
+  /* font-family: var(--font-single); */
+}
+.pay div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.bal {
+  border-top: var(--fade);
+  padding-top: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: left;
+  /* gap: 3rem; */
+}
+.pdfBtn {
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #0277bd;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.pdfBtn:hover {
+  background-color: #0b4a6e;
+}
+.divBtn{
+  display: flex;
+  gap: 10px;
+}
