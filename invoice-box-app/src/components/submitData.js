@@ -19,7 +19,7 @@ export const add = async (obj, ref,setId,navigate) => {
       
       setId(docId)
       
-      navigate('/pdf', { state: { ...obj,doc:docId} });
+      navigate('/pdf', { state: { ...obj,DocId:docId} });
     });
   } catch (err) {
     

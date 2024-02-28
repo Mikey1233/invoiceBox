@@ -21,10 +21,12 @@ function DynPdf() {
   let c = 0;
   const formData = location.state;
   const dataBaseRef = collection(db, "starredInvoice");
-
+console.log(formData)
   const addTostarred = async () => {
     try {
+      // const f = await fetchSingleData(formData?.Doc
       await addDoc(dataBaseRef, formData);
+      
       setStarred(true);
     } catch (err) {
       console.log(err);
