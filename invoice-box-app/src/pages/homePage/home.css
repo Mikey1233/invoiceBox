@@ -42,6 +42,6 @@
   .Home_body{
     grid-column: unset;
     grid-row: 1/2;
-    margin: 10px;
+    /* margin: 10px; */
   }
 }

@@ -188,6 +188,7 @@ function Create() {
           {/* <Inputs type={'textarea'} /> */}
           <textarea
             cols={"30"}
+            className="textarea"
             required
             rows={"7"}
             name="user"

@@ -181,3 +181,55 @@ margin-top: 1rem;
   cursor: pointer;
   margin: 1rem 5px;
 }
+@media screen and (max-width:700px){
+  .bill_form{
+    flex-direction: column;
+     align-items:flex-start;
+    /* margin-bottom: 1rem; */ 
+  }
+  .bill{
+    flex-direction: column;
+    /* display: flex;
+    padding: 10px;
+    margin-top: 1rem;
+    gap: 10px; */
+  }
+  .create_body .textarea { 
+  width: 98vw;
+  }
+  .bill input {
+    width: 75vw;
+  }
+  .bill{
+    margin-bottom: 1rem;
+  }
+  .des_tr{
+    display: none;
+  }
+  .des_list{
+    flex-direction: column;
+    background-color: #c7ced5;
+    padding:1rem 0.5rem;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.33); */
+    border-top: 1px solid rgba(0, 0, 0, 0.33);
+
+  }
+  .des_table button {
+   padding: 10px;
+  }
+  .dates .title{
+  border-radius: 0;
+  padding: 10px;
+  }
+  .dates,.des_bank{
+    border-radius: 0;
+    width: 100%;
+    gap: 10px;
+    padding-bottom: 15px;
+    margin-top: 1rem;
+  }
+  .des_bank p{
+    border-radius: 0;
+  }
+  
+}
