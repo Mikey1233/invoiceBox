@@ -4,10 +4,11 @@ import ListTab from "../listTab/ListTab";
 import { useState } from "react";
 import star from "../../assets/star2.svg";
 import { PieComp } from "../Piechart";
-import { getDocs,query,collection,where} from "firebase/firestore";
-import { auth ,db} from "../../config/firebaseConfig";
+import { getDocs, query, collection, where } from "firebase/firestore";
+import { auth, db } from "../../config/firebaseConfig";
+import noData from "../../assets/no-data.svg";
 function Starred() {
-  const user = auth?.currentUser?.uid
+  const user = auth?.currentUser?.uid;
   const [data, setData] = useState([]);
   useEffect(() => {
     async function getData() {
@@ -19,11 +20,11 @@ function Starred() {
       const fetchedSingleData = await singleSnapshot.docs.map((doc) => ({
         ...doc.data(),
       }));
-      setData(fetchedSingleData)
+      setData(fetchedSingleData);
     }
-    getData()
-  },[]);
-  
+    getData();
+  }, []);
+
   const paymentData = [
     { name: "paid", value: data.filter((a) => a.status === "paid").length },
     { name: "unpaid", value: data.filter((a) => a.status === "unpaid").length },
@@ -34,7 +35,7 @@ function Starred() {
       <div className="img2">
         <img src={star} alt="star_pic" />
       </div>
-      <div className="invoice_list-amount-2" style={{height:'50vh'}}>
+      <div className="invoice_list-amount-2" style={{ height: "50vh" }}>
         <div className="payTag">
           <div>
             paid<span className="green"></span>
@@ -46,8 +47,14 @@ function Starred() {
 
         <PieComp newData={paymentData} />
       </div>
-      <div className="invoice_list-dashboard">
-        <table className="left-aligned-table">
+      <div className="invoice_list-dashboard" style={{position:'relative'}}>
+        {
+           data.length === 0 ? (
+            <div className="new">
+              <img src={noData} alt="no-data" />
+              <p>sorry ,you haven't added any invoice</p>
+            </div>
+          ): ( <table className="left-aligned-table">
           <thead>
             <tr>
               <td>S/n</td>
@@ -59,6 +66,7 @@ function Starred() {
             </tr>
           </thead>
           <tbody>
+           
             {data.map((arr, i) => (
               <ListTab
                 count={i}
@@ -74,10 +82,11 @@ function Starred() {
                 key={arr.DocId}
                 formArr={arr}
               />
-              
             ))}
           </tbody>
-        </table>
+        </table>)
+        }
+       
       </div>
     </div>
   );

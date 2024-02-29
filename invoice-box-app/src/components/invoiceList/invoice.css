@@ -6,7 +6,10 @@
   grid-template-rows: 40% 60%;
   gap: 0.5rem;
 }
-
+.nodata{
+  width: 100%;
+  place-self: center;
+}
 .invoice_list-amount-1 {
   grid-column: 1/2;
   grid-row: 1/2;
@@ -88,11 +91,22 @@
   .invoice_list {
     height: fit-content;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 0.8fr 1fr;
+    gap: 1rem;
+    padding: 10px;
+
   }
   .invoice_list-amount-1 {
     grid-column: unset;
     grid-row: 1/2;
+    display: grid;
+    /* height: 38vh  */
+place-items: center
+;
+  }
+  .app{
+    /* margin-right: 10px */
+    /* padding-right: 10px; */
   }
   .invoice_list-amount-2 {
     grid-row: 2/3;
@@ -102,5 +116,6 @@
   .invoice_list-dashboard {
     grid-column: unset;
     grid-row: 3/4;
+    height: 50vh;
   }
 }

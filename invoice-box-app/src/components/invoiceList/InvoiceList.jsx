@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import LineChartComp from "../Piechart";
 import { PieComp } from "../Piechart";
 import { fetchdata } from "../submitData";
+import noData from "../../assets/no-data.svg";
 
 function InvoiceList() {
   let num = 0;
@@ -83,36 +84,42 @@ function InvoiceList() {
         <PieComp newData={paymentData} />
       </div>
       <div className="invoice_list-dashboard">
-        <table className="left-aligned-table">
-          <thead>
-            <tr>
-              <td>S/n</td>
-              <td>Client</td>
-              <td>Product QTY</td>
-              <td>Amount</td>
-              <td>Date</td>
-              <td>Status</td>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((arr, i) => (
-              <ListTab
-                count={i}
-                client={arr.billTo}
-                product={arr.items
-                  .map((arr) => +arr.quantity)
-                  .reduce((a, b) => a + b)}
-                date={arr.date?.join("-")}
-                status={arr.status}
-                amount={arr.items
-                  .map((arr) => +arr.quantity * +arr.amount)
-                  .reduce((a, b) => a + b)}
-                key={arr?.DocId}
-                formArr={arr}
-              />
-            ))}
-          </tbody>
-        </table>
+        {/* {data.length === 0 ? (
+          <div style={{width:'100%',display:'grid',justifyContent:'center'}}>
+            <img className="nodata" src={noData} alt="no-data" />
+          </div>
+        ) : ( */}
+          <table className="left-aligned-table">
+            <thead>
+              <tr>
+                <td>S/n</td>
+                <td>Client</td>
+                <td>Product QTY</td>
+                <td>Amount</td>
+                <td>Date</td>
+                <td>Status</td>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((arr, i) => (
+                <ListTab
+                  count={i}
+                  client={arr.billTo}
+                  product={arr.items
+                    .map((arr) => +arr.quantity)
+                    .reduce((a, b) => a + b)}
+                  date={arr.date?.join("-")}
+                  status={arr.status}
+                  amount={arr.items
+                    .map((arr) => +arr.quantity * +arr.amount)
+                    .reduce((a, b) => a + b)}
+                  key={arr?.DocId}
+                  formArr={arr}
+                />
+              ))}
+            </tbody>
+          </table>
+        {/* )} */}
       </div>
     </div>
   );

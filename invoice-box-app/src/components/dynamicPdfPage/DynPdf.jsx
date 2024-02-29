@@ -187,7 +187,7 @@ console.log(formData)
       </div>
       <div className="divBtn">
         <button onClick={exportToPdf} className="pdfBtn">
-          download pdf
+        <i class="bi bi-cloud-arrow-down-fill"></i> download pdf
         </button>
         {starred ? (
           <button

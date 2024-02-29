@@ -28,6 +28,9 @@
     grid-template-columns: 1fr;
     grid-template-rows:  1fr 100px;
     position: relative;
+    place-items: center;
+    gap: unset;
+    /* padding: 10px; */
   }
   .Home_nav{
     grid-column: unset;
@@ -43,5 +46,6 @@
     grid-column: unset;
     grid-row: 1/2;
     /* margin: 10px; */
+    margin: unset;
   }
 }

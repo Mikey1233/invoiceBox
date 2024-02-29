@@ -336,7 +336,7 @@ function Create() {
         </div>
         <div>
           <button className="submit" onClick={submitForm} type="submit">
-            Submit form
+          <i class="bi bi-send-check"></i> Submit form
           </button>
         </div>
       </div>

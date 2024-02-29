@@ -69,7 +69,7 @@ const InvoiceItem = ({items,setItems}) => {
           </div>
         ))}
       {/* </form> */}
-      <button type="menu" onClick={handleAddNewItem}>Add New Item</button>
+      <button type="menu" onClick={handleAddNewItem}><i class="bi bi-plus-circle-fill" style={{marginRight:'3px'}}></i>Add New Item</button>
     </div>
   );
 };
