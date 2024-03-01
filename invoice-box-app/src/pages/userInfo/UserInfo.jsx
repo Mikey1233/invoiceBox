@@ -89,7 +89,7 @@ function UserInfo() {
             </div>
             <input
               type="email"
-              style={{ border: "1px solid black", margin: "10px 2px 10px 2px" }}
+              className="userEmail"
               onChange={(e) => addState(e, setEmail)}
               placeholder="enter email address"
               name="email"

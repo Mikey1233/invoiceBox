@@ -39,8 +39,23 @@
     cursor: pointer;
 
 }
+.userEmail{
+    border: 1px solid #121212;
+}
 .form-grid{
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 20px;
+}
+@media screen and (max-width:700px){
+    .form-grid{
+        grid-template-columns: unset;
+        grid-template-rows: repeat(2,1fr);
+    }
+    .user_form{
+        margin: 10px;
+    }
+    .user_form form{
+        background-color: unset;
+    }
 }
