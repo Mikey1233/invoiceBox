@@ -5,12 +5,13 @@ import InvoiceItem from "./InvoiceItem";
 import { add, hasEmptyInputs } from "../submitData";
 import Modal from "../modal/Modal";
 import { auth } from "../../config/firebaseConfig";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 function Create() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  
+  const [base64, setBase64] = useState("");
+
   const months = [
     "Jan",
     "Feb",
@@ -25,10 +26,14 @@ function Create() {
     "Nov",
     "Dec",
   ];
-  
+
   // const fullDate = 'hey'
-  const fullDate = [new Date().getDate(),months[new Date().getMonth()],new Date().getFullYear()]
-  const [id,setId] = useState('')
+  const fullDate = [
+    new Date().getDate(),
+    months[new Date().getMonth()],
+    new Date().getFullYear(),
+  ];
+  const [id, setId] = useState("");
   const [formData, setFormData] = useState({
     // Initial values for each field
     user: "",
@@ -60,9 +65,9 @@ function Create() {
   const [error, setError] = useState(false);
 
   const [items, setItems] = useState([
-    { description: "", amount: '', quantity: '', productName: "" },
+    { description: "", amount: "", quantity: "", productName: "" },
   ]);
- 
+
   const [selectedImage, setSelectedImage] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -85,13 +90,18 @@ function Create() {
       );
       return;
     }
-   
+
     const reader = new FileReader();
     reader.onload = (e) => {
       setSelectedImage(e.target.result);
     };
     reader.readAsDataURL(file);
-  
+    reader.onloadend = () => {
+      const base64Data = reader.result;
+      // Use the base64 data as needed (e.g., display in an image tag)
+      console.log(base64Data);
+      setBase64(base64Data);
+    };
   };
   const handleCancel = () => {
     setSelectedImage(null);
@@ -120,8 +130,19 @@ function Create() {
         bankAccName: "",
         bankName: "",
       });
-      
-   add({ ...formData, items: items,date:fullDate, userId: auth?.currentUser?.uid},'invoice',setId,navigate);
+
+      add(
+        {
+          ...formData,
+          items: items,
+          date: fullDate,
+          userId: auth?.currentUser?.uid,
+          img64: base64,
+        },
+        "invoice",
+        setId,
+        navigate
+      );
     }
   };
   return (
@@ -227,7 +248,7 @@ function Create() {
             </div>
             <div className="dates">
               <div className="title">Delivery form</div>
-              
+
               <div>
                 <label htmlFor="payment_method">Payment Method:</label>
                 <select
@@ -336,7 +357,7 @@ function Create() {
         </div>
         <div>
           <button className="submit" onClick={submitForm} type="submit">
-          <i class="bi bi-send-check"></i> Submit form
+            <i class="bi bi-send-check"></i> Submit form
           </button>
         </div>
       </div>

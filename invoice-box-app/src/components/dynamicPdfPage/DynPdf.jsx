@@ -6,41 +6,55 @@ import {
   deleteDocFromDb,
   fetchSingleData,
   // fetchSingleData,
+  fetchdata,
 } from "../submitData";
 import { useState } from "react";
-import { addDoc, collection,where,query, getDocs } from "firebase/firestore";
-import { db } from "../../config/firebaseConfig";
-function DynPdf() {
+import { addDoc, collection, where, query, getDocs } from "firebase/firestore";
+import { db, auth } from "../../config/firebaseConfig";
+
+function DynPdf({ setInvoice, setStar }) {
   const location = useLocation();
 
-
-
-  
   const [starred, setStarred] = useState(false);
   const [dataFromDb, setDataFromDb] = useState([]);
+
+  const [userInfoData, setInfoData] = useState([]);
   let c = 0;
   const formData = location.state;
   const dataBaseRef = collection(db, "starredInvoice");
-console.log(formData)
+
+  const updateStarList = async () => {
+    const q = await query(
+      collection(db, "starredInvoice"),
+      where("userId", "==", auth?.currentUser?.uid)
+    );
+    const querySnapshot = await getDocs(q);
+    const fetchedData = await querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+    }));
+    console.log(fetchedData);
+    setStar(fetchedData);
+  };
+
   const addTostarred = async () => {
     try {
-      // const f = await fetchSingleData(formData?.Doc
       await addDoc(dataBaseRef, formData);
-      
       setStarred(true);
+      updateStarList();
     } catch (err) {
       console.log(err);
       setStarred(false);
     }
   };
- const removeFromStarred = async () =>{
-  try{
-    const deleteId = dataFromDb[0]?.DocId
-  await  deleteDocFromDb("starredInvoice",deleteId,setStarred)
-  }catch(err){
-  console.log(err)
-  }
- }
+  const removeFromStarred = async () => {
+    try {
+      const deleteId = dataFromDb[0]?.DocId;
+      await deleteDocFromDb("starredInvoice", deleteId, setStarred);
+      updateStarList();
+    } catch (err) {
+      console.log(err);
+    }
+  };
   /////////item price
   const total = formData.items
     .map((arr) => +arr.quantity * +arr.amount)
@@ -49,19 +63,27 @@ console.log(formData)
   useEffect(() => {
     async function fetchData() {
       try {
-    const x = await fetchSingleData(formData?.DocId)
-    setDataFromDb(x)
-        const collectionRef = collection(db, 'starredInvoice');
-        let q = await query(collectionRef, where("DocId", "==", formData?.DocId))
-        const a = await getDocs(q)
+        const x = await fetchSingleData(formData?.DocId);
+        setDataFromDb(x);
+        const collectionRef = collection(db, "starredInvoice");
+        let q = await query(
+          collectionRef,
+          where("DocId", "==", formData?.DocId)
+        );
+        const a = await getDocs(q);
         // console.log(x)
-        
-        if(a.size === 0){
-             setStarred(false)
-        }else{
-            setStarred(true)
+
+        if (a.size === 0) {
+          setStarred(false);
+        } else {
+          setStarred(true);
         }
-          //  setStarred(true)
+        //  setStarred(true)
+
+        ///////////update inovice data
+        fetchdata("invoice", "userId", setInvoice);
+        fetchdata("UserInfo", "userId", setInfoData);
+        console.log(userInfoData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -71,7 +93,7 @@ console.log(formData)
 
     // Make sure to include any dependencies that affect this effect
   }, [location]);
-  
+
   const TrRol = ({ name, des, rate, qty }) => {
     const amount = +rate * +qty;
     return (
@@ -104,17 +126,32 @@ console.log(formData)
     html2pdf().from(element).set(opt).save();
   };
   return (
-    <div>
+    <div className="dynpdf">
       <div id="invoice">
         {/*Invoice Issuer details  */}
         <div id="issuer" className="issuer">
           <div className="issuer-details">
-            <div>name</div>
-            <div>business</div>
-            <div>phone number</div>
-            <div>id : {formData?.doc}</div>
+            <div>
+              <div className="busName">{userInfoData[0]?.BusinessName}</div>
+              <address>
+                <i class="bi bi-geo-alt-fill"></i> {userInfoData[0]?.addressOne}
+              </address>
+              <address>
+                <i class="bi bi-geo-alt-fill"></i> {userInfoData[0]?.addressTwo}
+              </address>
+              <div>
+                {" "}
+                <i className="bi bi-telephone-fill"></i>{" "}
+                {userInfoData[0]?.telOne}
+              </div>
+              <div>
+                <i class="bi bi-phone"></i> {userInfoData[0]?.telTwo}
+              </div>
+              <div>{userInfoData[0]?.email}</div>
+            </div>
           </div>
-          <div className="issuer-img">{/* <img /> */}</div>
+
+          <img src={formData?.img64} className="busImg" />
         </div>
         <div className="billTo">
           <div>
@@ -187,13 +224,13 @@ console.log(formData)
       </div>
       <div className="divBtn">
         <button onClick={exportToPdf} className="pdfBtn">
-        <i class="bi bi-cloud-arrow-down-fill"></i> download pdf
+          <i class="bi bi-cloud-arrow-down-fill"></i> download pdf
         </button>
         {starred ? (
           <button
             className="pdfBtn"
-            onClick={() =>
-              removeFromStarred()
+            onClick={
+              () => removeFromStarred()
               // deleteDocFromDb("starredInvoice", dataFromDb[0]?.id, setStarred)
             }
           >

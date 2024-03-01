@@ -57,6 +57,18 @@
   justify-content: space-between;
   font-family: "PT Sans", sans-serif;
 }
+.issuer-details{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.issuer-details div{
+  width: fit-content;
+}
+.busImg{
+  width: 20%;
+  object-fit: contain;
+}
 .bankDet {
   display: flex;
   padding: 2rem 4px 1rem 4px;
@@ -114,4 +126,19 @@
 .divBtn{
   display: flex;
   gap: 10px;
+}
+.busName{
+  font-weight: bold;
+  font-size: 30px;
+}
+@media screen and (max-width:700px){
+  
+  .issuer{
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+  .dynpdf{
+    padding-bottom: 20px;
+  }
+  
 }

@@ -86,12 +86,13 @@ export const fetchdata = async (from, docName, setData) => {
     );
 
     const querySnapshot = await getDocs(q);
-
+// console.log(querySnapshot.size)
     const fetchedData = await querySnapshot.docs.map((doc) => ({
       ...doc.data(),
       DocId: doc.id,
     }));
     setData(fetchedData);
+//  console.log(fetchedData)
   } catch (err) {
     
   }

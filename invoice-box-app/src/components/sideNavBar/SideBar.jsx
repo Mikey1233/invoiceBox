@@ -7,7 +7,7 @@ import { auth } from "../../config/firebaseConfig";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import List from "../listComp/List";
-function SideBar() {
+function SideBar({setStar,setInvoice}) {
   const location = useLocation();
   const currentPathname = location.pathname;
   const [userActive, setUserActive] = useState(false);
@@ -40,6 +40,9 @@ function SideBar() {
       await signOut(auth);
       console.log("signed out");
       navigate("/authUser");
+      /////update data states back to empty
+      setStar([])
+      setInvoice([])
     } catch (err) {
       console.log(err);
     }

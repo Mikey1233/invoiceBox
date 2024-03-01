@@ -2,38 +2,42 @@ import React, { useEffect } from "react";
 import "./starred.css";
 import ListTab from "../listTab/ListTab";
 import { useState } from "react";
-import star from "../../assets/star2.svg";
+import starPic from "../../assets/star2.svg";
 import { PieComp } from "../Piechart";
 import { getDocs, query, collection, where } from "firebase/firestore";
 import { auth, db } from "../../config/firebaseConfig";
 import noData from "../../assets/no-data.svg";
-function Starred() {
+function Starred({ star, setStar }) {
   const user = auth?.currentUser?.uid;
-  const [data, setData] = useState([]);
+  console.log(star)
   useEffect(() => {
     async function getData() {
       const single = await query(
         collection(db, "starredInvoice"),
         where("userId", "==", user)
       );
-      const singleSnapshot = await getDocs(single);
-      const fetchedSingleData = await singleSnapshot.docs.map((doc) => ({
-        ...doc.data(),
-      }));
-      setData(fetchedSingleData);
+      if(star.length === 0){
+        const singleSnapshot = await getDocs(single);
+        const fetchedSingleData = await singleSnapshot.docs.map((doc) => ({
+          ...doc.data(),
+        }));
+        setStar(fetchedSingleData);
+        console.log(fetchedSingleData)
+      }
+     
     }
     getData();
   }, []);
 
   const paymentData = [
-    { name: "paid", value: data.filter((a) => a.status === "paid").length },
-    { name: "unpaid", value: data.filter((a) => a.status === "unpaid").length },
+    { name: "paid", value: star.filter((a) => a.status === "paid").length },
+    { name: "unpaid", value: star.filter((a) => a.status === "unpaid").length },
   ];
 
   return (
     <div className="starred">
       <div className="img2">
-        <img src={star} alt="star_pic" />
+        <img src={starPic} alt="star_pic" />
       </div>
       <div className="invoice_list-amount-2" style={{ height: "50vh" }}>
         <div className="payTag">
@@ -49,7 +53,7 @@ function Starred() {
       </div>
       <div className="invoice_list-dashboard" style={{position:'relative'}}>
         {
-           data.length === 0 ? (
+           star.length === 0 ? (
             <div className="new">
               <img src={noData} alt="no-data" />
               <p>sorry ,you haven't added any invoice</p>
@@ -67,7 +71,7 @@ function Starred() {
           </thead>
           <tbody>
            
-            {data.map((arr, i) => (
+            {star.map((arr, i) => (
               <ListTab
                 count={i}
                 client={arr.billTo}

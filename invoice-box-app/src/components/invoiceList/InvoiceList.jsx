@@ -7,15 +7,50 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import LineChartComp from "../Piechart";
 import { PieComp } from "../Piechart";
 import { fetchdata } from "../submitData";
-import noData from "../../assets/no-data.svg";
+import { useNavigate } from "react-router-dom";
+import { db } from "../../config/firebaseConfig";
+import { collection, where, query, getDocs } from "firebase/firestore";
 
-function InvoiceList() {
-  let num = 0;
-  const [data, setData] = useState([]);
+function InvoiceList({ invoiceData, setInvoice }) {
+  const navigate = useNavigate();
   const userIdToFetch = auth?.currentUser?.uid;
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const invoice = data.map((arr) => arr.date[1]);
+  const invoice = invoiceData.map((arr) => arr.date[1]);
+  useEffect(() => {
+    const auth = getAuth();
+
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      
+      if (user) {
+        try {
+          if(invoiceData.length === 0){
+            fetchdata("invoice", "userId", setInvoice);
+            }
+          const q = await query(
+            collection(db, "UserInfo"),
+            where("userId", "==", userIdToFetch)
+          );
+          const querySnapshot = await getDocs(q);
+          const fetchedData = await querySnapshot.docs.map((doc) => ({
+            ...doc.data(),
+          })); 
+          if (fetchedData.length === 0) {
+            navigate("/userInfo");
+          }
+        } catch (err) {
+          setError(err);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        // Handle the case when the user is not logged in
+      }
+    });
+
+    return unsubscribe; // Unsubscribe from the listener when the component unmounts
+  }, [invoiceData]);
+
 
   ////////////////////
   let data3 = [
@@ -41,31 +76,17 @@ function InvoiceList() {
   });
 
   const paymentData = [
-    { name: "paid", value: data.filter((a) => a.status === "paid").length },
-    { name: "unpaid", value: data.filter((a) => a.status === "unpaid").length },
+    {
+      name: "paid",
+      value: invoiceData.filter((a) => a.status === "paid").length,
+    },
+    {
+      name: "unpaid",
+      value: invoiceData.filter((a) => a.status === "unpaid").length,
+    },
   ];
 
-  useEffect(() => {
-    const auth = getAuth();
-
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        try {
-          //fetching list of invoice from db
-          fetchdata("invoice", "userId", setData);
-        } catch (err) {
-          setError(err);
-        } finally {
-          setIsLoading(false);
-        }
-      } else {
-        // Handle the case when the user is not logged in
-      }
-    });
-
-    return unsubscribe; // Unsubscribe from the listener when the component unmounts
-  }, []);
-
+ 
   return (
     <div className="invoice_list">
       <div className="invoice_list-amount-1">
@@ -84,42 +105,36 @@ function InvoiceList() {
         <PieComp newData={paymentData} />
       </div>
       <div className="invoice_list-dashboard">
-        {/* {data.length === 0 ? (
-          <div style={{width:'100%',display:'grid',justifyContent:'center'}}>
-            <img className="nodata" src={noData} alt="no-data" />
-          </div>
-        ) : ( */}
-          <table className="left-aligned-table">
-            <thead>
-              <tr>
-                <td>S/n</td>
-                <td>Client</td>
-                <td>Product QTY</td>
-                <td>Amount</td>
-                <td>Date</td>
-                <td>Status</td>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((arr, i) => (
-                <ListTab
-                  count={i}
-                  client={arr.billTo}
-                  product={arr.items
-                    .map((arr) => +arr.quantity)
-                    .reduce((a, b) => a + b)}
-                  date={arr.date?.join("-")}
-                  status={arr.status}
-                  amount={arr.items
-                    .map((arr) => +arr.quantity * +arr.amount)
-                    .reduce((a, b) => a + b)}
-                  key={arr?.DocId}
-                  formArr={arr}
-                />
-              ))}
-            </tbody>
-          </table>
-        {/* )} */}
+        <table className="left-aligned-table">
+          <thead>
+            <tr>
+              <td>S/n</td>
+              <td>Client</td>
+              <td>Product QTY</td>
+              <td>Amount</td>
+              <td>Date</td>
+              <td>Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            {invoiceData.map((arr, i) => (
+              <ListTab
+                count={i}
+                client={arr.billTo}
+                product={arr.items
+                  .map((arr) => +arr.quantity)
+                  .reduce((a, b) => a + b)}
+                date={arr.date?.join("-")}
+                status={arr.status}
+                amount={arr.items
+                  .map((arr) => +arr.quantity * +arr.amount)
+                  .reduce((a, b) => a + b)}
+                key={arr?.DocId}
+                formArr={arr}
+              />
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

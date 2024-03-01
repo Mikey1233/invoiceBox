@@ -20,26 +20,32 @@ import Create from "./components/createInvoice/Create";
 import Starred from "./components/starred/Starred";
 import InvoiceList from "./components/invoiceList/InvoiceList";
 import DynPdf from "./components/dynamicPdfPage/DynPdf";
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Rootlayout />}>
-      <Route path="authUser" element={<AuthLayout />}>
-        <Route index element={<LoginUser />} />
-        <Route path="signup" element={<Signup />} />
-      </Route>
-      <Route path="userInfo" element={<UserInfo />} />
-      <Route path="/" element={<Home />}>
-        <Route index element={<InvoiceList />} />
-        <Route path="settings" element={<Setting />} />
-        <Route path="create" element={<Create />} />
-        <Route path="starred" element={<Starred />} />
-        <Route path="pdf" element={<DynPdf />} />
-      </Route>
-    </Route>
-  )
-);
+
+import { useState } from "react";
+
 
 function App() {
+  const [invoice,setInvoice] = useState([])
+  const [starList,setStar] = useState([])
+  const router = createBrowserRouter(
+
+    createRoutesFromElements(
+      <Route path="/" element={<Rootlayout />}>
+        <Route path="authUser" element={<AuthLayout />}>
+          <Route index element={<LoginUser />} />
+          <Route path="signup" element={<Signup />} />
+        </Route>
+        <Route path="userInfo" element={<UserInfo />} />
+        <Route path="/" element={<Home setStar={setStar} setInvoice={setInvoice}/>}>
+          <Route index element={<InvoiceList invoiceData={invoice} setInvoice={setInvoice}/>} />
+          <Route path="settings" element={<Setting />} />
+          <Route path="create" element={<Create />} />
+          <Route path="starred" element={<Starred star={starList} setStar={setStar}/>} />
+          <Route path="pdf" element={<DynPdf invoiceData={invoice} setStar={setStar} setInvoice={setInvoice}/>} />
+        </Route>
+      </Route>
+    )
+  );
   return <RouterProvider router={router} />;
 }
 

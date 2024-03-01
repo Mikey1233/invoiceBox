@@ -7,6 +7,7 @@ import Modal from "../../components/modal/Modal";
 import { useNavigate } from "react-router-dom";
 import SpinLoader from "../../components/spinLoader/SpinLoader";
 import { hasEmptyInputs } from "../../components/submitData";
+import { fetchdata } from "../../components/submitData";
 
 function UserInfo() {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ function UserInfo() {
   const [error, setError] = useState(false);
 
   const user = auth?.currentUser?.uid;
+  const [userData,setUserData] = useState([])
   
   const sendDataToDB = async () => {
     setLoader(true)
@@ -45,6 +47,7 @@ function UserInfo() {
           Name: username,
           userId: user,
         });
+        // const userData2 =await fetchdata('UserInfo','userId',setUserData)
         navigate("/");
       } catch (err) {
         setError(true);
