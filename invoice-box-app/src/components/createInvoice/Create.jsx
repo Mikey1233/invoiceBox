@@ -191,7 +191,7 @@ function Create() {
                   <img
                     src={selectedImage}
                     alt="Chosen Image"
-                    style={{ height: "100%", width: "100%" }}
+                    style={{ height: "100px", width: "100%",objectFit:'cover' }}
                   />
                 </div>
               </div>

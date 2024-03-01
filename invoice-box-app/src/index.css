@@ -24,3 +24,8 @@
 a{
   color: var(--bg-purple);
 }
+button ,a{
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  touch-action: manipulation;
+}

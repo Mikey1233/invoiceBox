@@ -110,7 +110,8 @@ export default function LoginUser() {
             </div>
             <input
               type="email"
-              style={{ border: "1px solid black", margin: "10px 2px 10px 2px" }}
+              className="signEmail"
+              // style={{ border: "1px solid black", margin: "10px 2px 10px 2px" }}
               onChange={(e) => setEmail(e.target.value)}
               name="email"
               required
@@ -124,6 +125,7 @@ export default function LoginUser() {
 
             <div className="input_box">
               <input
+              className="signPass"
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 name="password"

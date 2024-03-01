@@ -185,14 +185,9 @@ margin-top: 1rem;
   .bill_form{
     flex-direction: column;
      align-items:flex-start;
-    /* margin-bottom: 1rem; */ 
   }
   .bill{
     flex-direction: column;
-    /* display: flex;
-    padding: 10px;
-    margin-top: 1rem;
-    gap: 10px; */
   }
   .create_body .textarea { 
   width: 98vw;
@@ -202,6 +197,14 @@ margin-top: 1rem;
   }
   .bill{
     margin-bottom: 1rem;
+  }
+  .create_header{
+    flex-direction: column-reverse;
+    gap: 1rem;
+    min-height:110px ;
+  }
+  .image-upload-box{
+    width: 50vw;
   }
   .des_tr{
     display: none;
@@ -231,6 +234,20 @@ margin-top: 1rem;
   }
   .des_bank p{
     border-radius: 0;
+  }
+  .dates{
+    background-color: #f5f5f5;
+  }
+  .dates div input,.des_bank div input{
+    padding: 15px 10px;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 5px;
+    border: 1px solid rgba(138, 134, 134, 0.34);
+    margin-right: 3px;
+  }
+  .des_bank{
+    padding-right: 4px;
   }
   
 }

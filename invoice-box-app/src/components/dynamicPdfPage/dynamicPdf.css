@@ -133,10 +133,7 @@
 }
 @media screen and (max-width:700px){
   
-  .issuer{
-    flex-direction: column-reverse;
-    gap: 1rem;
-  }
+  
   .dynpdf{
     padding-bottom: 20px;
   }

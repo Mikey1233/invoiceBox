@@ -16,3 +16,11 @@
     width: 100%;
     background: var(--bg-purple);
 }
+@media screen and (max-width:700px){
+    .purple_bg{
+        display: none;
+    }
+    .authuser{
+        padding-top: 2rem;
+    }
+}

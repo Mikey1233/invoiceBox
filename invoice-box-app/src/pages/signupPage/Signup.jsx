@@ -89,7 +89,8 @@ function Signup() {
             </div>
             <input
               onChange={(e) => setEmail(e.target.value)}
-              style={{ border: "1px solid black", margin: "10px 2px 10px 2px" }}
+              className="signEmail"
+              // style={{ border: "1px solid black", margin: "10px 2px 10px 2px" }}
               type="email"
               id="email"
               name="email"
@@ -111,6 +112,7 @@ function Signup() {
             <div className="input_box">
               <input
                 aria-describedby="password-error"
+                className="signPass"
                 ref={ref1}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -143,6 +145,7 @@ function Signup() {
             </div>
             <div className="input_box">
               <input
+              className="signPass"
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
                   setPasswordMatch(false);
