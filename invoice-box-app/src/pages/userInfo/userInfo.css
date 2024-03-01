@@ -58,14 +58,18 @@
     .user_form form{
         background-color: unset;
     }
+    form h3{
+        font-size: 1.7rem;
+    }
     .user_form form input{
         width: 100%;
         /* border: 0; */
         margin-top: 3px;
+        /* padding: 10px 5px; */
         outline: none;
         border: 1px solid #3a383869;
-        border-radius: 5px;
-        padding: 0.5rem;
+        border-radius: 3px;
+        padding:1rem  0.5rem;
         
     }
 }
