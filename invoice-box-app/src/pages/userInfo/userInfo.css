@@ -58,4 +58,14 @@
     .user_form form{
         background-color: unset;
     }
+    .user_form form input{
+        width: 100%;
+        /* border: 0; */
+        margin-top: 3px;
+        outline: none;
+        border: 1px solid #3a383869;
+        border-radius: 5px;
+        padding: 0.5rem;
+        
+    }
 }
